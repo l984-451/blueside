@@ -1,0 +1,35 @@
+[
+ {
+  "notam_id": "6/9020",
+  "facility": "ZLC",
+  "state": "MT",
+  "type": "SECURITY",
+  "description": "Missoula, MT, Wednesday, October 14, 2026 Local",
+  "mod_date": "10/12/2026 16:25:00",
+  "mod_abs_time": "202610121625",
+  "is_new": "Y",
+  "gid": "6/9020"
+ },
+ {
+  "notam_id": "6/8927",
+  "facility": "ZSE",
+  "state": "MT",
+  "type": "VIP",
+  "description": "Kalispell, MT, Wednesday, October 14, 2026 through Wednesday, October 14, 2026 Local",
+  "mod_date": "10/12/2026 10:55:00",
+  "mod_abs_time": "202610121055",
+  "is_new": "Y",
+  "gid": "6/8927"
+ },
+ {
+  "notam_id": "0/0367",
+  "facility": "FDC",
+  "state": "USA",
+  "type": "SECURITY",
+  "description": "  USA, Wednesday, January 15, 2020 UTC",
+  "mod_date": "01/02/2020 23:07:00",
+  "mod_abs_time": "202001022307",
+  "is_new": "N",
+  "gid": null
+ }
+]

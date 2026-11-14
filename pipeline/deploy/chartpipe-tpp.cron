@@ -1,0 +1,2 @@
+# Airport diagrams and procedures, daily at 01:00 server time (d-TPP cycle is 28 days; most days find nothing new)
+0 1 * * * bash /srv/chartpipe/deploy/tpp-run.sh

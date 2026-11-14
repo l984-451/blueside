@@ -1,0 +1,2 @@
+# Nav data, daily at 04:00 server time
+0 4 * * * bash /srv/chartpipe/deploy/nav-run.sh

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Blueside mark: a VOR head with its needle one dot right. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:pathData="M4,24a20,20 0 1,0 40,0a20,20 0 1,0 -40,0z" android:strokeColor="#000000" android:strokeWidth="3.4" />
+    <path android:pathData="M30,13.7L30,34.3" android:strokeColor="#000000" android:strokeWidth="3.4" android:strokeLineCap="round" />
+    <path android:pathData="M18.9,24a2.1,2.1 0 1,0 4.2,0a2.1,2.1 0 1,0 -4.2,0zM11.4,24a2.1,2.1 0 1,0 4.2,0a2.1,2.1 0 1,0 -4.2,0z"
+        android:fillColor="#000000" />
+</vector>

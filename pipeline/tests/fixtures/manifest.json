@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "cycles": [
+    {
+      "id": "2026-09-03",
+      "effective": "2026-09-03T09:01:00Z",
+      "expires": "2026-10-29T09:01:00Z",
+      "packs": [
+        {
+          "layer": "vfr",
+          "region": "TX",
+          "bytes": 10,
+          "sha256": "abababababababababababababababababababababababababababababababab",
+          "path": "charts/2026-09-03/vfr/TX.pmtiles"
+        },
+        {
+          "layer": "vfr",
+          "region": "overview",
+          "bytes": 5,
+          "sha256": "abababababababababababababababababababababababababababababababab",
+          "path": "charts/2026-09-03/vfr/overview.pmtiles"
+        },
+        {
+          "layer": "vfr-tac",
+          "region": "TX",
+          "bytes": 7,
+          "sha256": "abababababababababababababababababababababababababababababababab",
+          "path": "charts/2026-09-03/vfr-tac/TX.pmtiles"
+        }
+      ]
+    },
+    {
+      "id": "2026-10-29",
+      "effective": "2026-10-29T09:01:00Z",
+      "expires": "2026-12-24T09:01:00Z",
+      "packs": [
+        {
+          "layer": "vfr",
+          "region": "TX",
+          "bytes": 10,
+          "sha256": "abababababababababababababababababababababababababababababababab",
+          "path": "charts/2026-10-29/vfr/TX.pmtiles"
+        },
+        {
+          "layer": "vfr",
+          "region": "overview",
+          "bytes": 5,
+          "sha256": "abababababababababababababababababababababababababababababababab",
+          "path": "charts/2026-10-29/vfr/overview.pmtiles"
+        },
+        {
+          "layer": "vfr-tac",
+          "region": "TX",
+          "bytes": 7,
+          "sha256": "abababababababababababababababababababababababababababababababab",
+          "path": "charts/2026-10-29/vfr-tac/TX.pmtiles"
+        }
+      ]
+    }
+  ],
+  "base": [
+    {
+      "layer": "street",
+      "region": "TX",
+      "bytes": 9,
+      "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+      "version": "1",
+      "path": "charts/base/street/TX-cdcdcdcdcdcdcdcd.pmtiles"
+    }
+  ]
+}

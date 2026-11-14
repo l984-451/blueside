@@ -1,0 +1,2 @@
+# Check that the jobs still run, every 15 minutes
+*/15 * * * * bash /srv/chartpipe/deploy/watch.sh

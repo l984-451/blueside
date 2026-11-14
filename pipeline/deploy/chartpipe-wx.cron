@@ -1,0 +1,2 @@
+# Weather mirror, every five minutes
+*/5 * * * * bash /srv/chartpipe/deploy/wx-run.sh

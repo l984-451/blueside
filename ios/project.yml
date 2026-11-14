@@ -1,0 +1,118 @@
+name: Blueside
+options:
+  deploymentTarget: {iOS: "26.0"}
+  createIntermediateGroups: true
+packages:
+  MapLibre:
+    url: https://github.com/maplibre/maplibre-gl-native-distribution
+    exactVersion: 6.31.0
+  FlightCore:
+    path: ../core
+settings:
+  base:
+    # The product name and bundle id live here and nowhere else.
+    APP_DISPLAY_NAME: Blueside
+    APP_BUNDLE_ID: com.gstudios.blueside
+    MANIFEST_BASE_URL: https://pub-b4d06f1c406b4312b314d87c67ecf862.r2.dev
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    CODE_SIGNING_ALLOWED: NO
+    GENERATE_INFOPLIST_FILE: YES
+    # An app extension installs only with a version, the same as its app's. The upload sets its own.
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Blueside:
+    type: application
+    platform: iOS
+    sources:
+      - App
+      - {path: Map, optional: true}
+      - {path: Position, optional: true}
+      - {path: Downloads, optional: true}
+      - {path: Layers, optional: true}
+      - {path: Nav, optional: true}
+      - {path: Weather, optional: true}
+      - Live
+      # A folder reference keeps file paths inside the bundle. Never name it Resources.
+      - {path: MapAssets, type: folder}
+    info:
+      path: Info.plist
+      properties:
+        ManifestBaseURL: $(MANIFEST_BASE_URL)
+        # Plain HTTP to this machine only, for the local test server. The chart host is HTTPS.
+        NSAppTransportSecurity: {NSAllowsLocalNetworking: true}
+        UILaunchScreen: {}
+        # Lets a background location session keep position, traffic and weather live in flight.
+        UIBackgroundModes: [location]
+        # The route in flight on the Lock Screen and in the Dynamic Island.
+        NSSupportsLiveActivities: true
+    # Test packs stay out of Release; only tests and launch options read them.
+    postBuildScripts:
+      - name: Remove test data from Release
+        basedOnDependencyAnalysis: false
+        script: |
+          [ "$CONFIGURATION" = Release ] || exit 0
+          cd "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/MapAssets"
+          rm -f test-*.pmtiles nav-tiles.pmtiles nav-vfr.pmtiles nav-test.sqlite plates-test.sqlite
+    dependencies:
+      - package: MapLibre
+        product: MapLibre
+      - package: FlightCore
+        product: FlightCore
+      - target: BluesideWidgets
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)
+        INFOPLIST_KEY_CFBundleDisplayName: $(APP_DISPLAY_NAME)
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: Shows your aircraft on the map.
+        # ADS-B receivers send GDL 90 over UDP on their own Wi-Fi network.
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: Receives traffic and GPS from an ADS-B receiver on this Wi-Fi network.
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        TARGETED_DEVICE_FAMILY: "1,2"
+  # Only the Live Activity's attributes and views; the app decides when it runs.
+  BluesideWidgets:
+    type: app-extension
+    platform: iOS
+    sources: [Widgets, Live/RouteActivity.swift]
+    info:
+      path: Widgets/Info.plist
+      properties:
+        NSExtension: {NSExtensionPointIdentifier: com.apple.widgetkit-extension}
+        # App Store builds need the app's name and its version and build number in the extension too.
+        CFBundleDisplayName: $(APP_DISPLAY_NAME)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID).widgets
+        TARGETED_DEVICE_FAMILY: "1,2"
+  BluesideTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests]
+    dependencies:
+      - target: Blueside
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID).tests
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/Blueside.app/Blueside
+  BluesideUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [UITests]
+    dependencies:
+      - target: Blueside
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID).uitests
+        TEST_TARGET_NAME: Blueside
+schemes:
+  Blueside:
+    build:
+      targets: {Blueside: all, BluesideTests: [test], BluesideUITests: [test]}
+    test:
+      targets: [BluesideTests, BluesideUITests]

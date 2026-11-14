@@ -1,0 +1,17 @@
+.DS_Store
+.build/
+.swiftpm/
+.repowise/
+.superpowers/
+DerivedData/
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+*.xcodeproj/
+*.xcresult/
+xcuserdata/
+android/.gradle/
+android/**/build/
+local.properties
+pipeline/deploy/site.env

@@ -1,0 +1,3 @@
+#!/bin/bash
+# Check the core only when a commit touches it.
+git diff --cached --quiet -- core || exec core/scripts/check.sh
